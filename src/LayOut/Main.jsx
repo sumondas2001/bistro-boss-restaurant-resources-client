@@ -1,13 +1,19 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../Shared/Footer/Footer";
 import NavBar from "../Shared/Footer/NavBar/NavBar";
 
 const Main = () => {
+     const location = useLocation();
+     const isLoginRoute = location.pathname.includes("login");
+
      return (
           <div className="max-w-7xl mx-auto">
-               <NavBar />
+
+               {isLoginRoute || <NavBar />}
+
                <Outlet />
-               <Footer />
+               {isLoginRoute || <Footer />}
+
           </div>
      );
 };
