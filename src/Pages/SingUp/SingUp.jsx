@@ -1,11 +1,16 @@
 import { useForm } from 'react-hook-form';
 import loginImg from '../../assets/others/authentication2.png'
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import { updateProfile } from 'firebase/auth';
+import SocialLogin from '../../component/socialLogin/socialLogin';
 const SingUp = () => {
-     const { createUser } = useContext(AuthContext);
+     const axiosPublic = useAxiosPublic();
+     const { createUser, user } = useContext(AuthContext);
+     const navigate = useNavigate()
      const {
           register,
           handleSubmit,
@@ -18,6 +23,25 @@ const SingUp = () => {
                .then(result => {
                     const singUpUser = result.user;
                     console.log(singUpUser);
+                    updateProfile(singUpUser, {
+                         displayName: data.name
+                    })
+                         .then(() => {
+                              const userInfo = {
+                                   email: data.email,
+                                   name: data.name,
+                                   // password: data.password,
+
+                              }
+                              axiosPublic.post('/user', userInfo)
+                                   .then(res => {
+                                        if (res.data.insertedId) {
+                                             navigate('/')
+
+                                        }
+                                   })
+                         })
+
                })
      }
 
@@ -68,6 +92,7 @@ const SingUp = () => {
                                         <button type='submit' className="btn btn-primary w-full">Sing Up</button>
                                    </div>
                               </form>
+                              <SocialLogin />
                          </div>
                     </div>
                </div>

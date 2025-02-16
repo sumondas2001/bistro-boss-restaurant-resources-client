@@ -3,15 +3,17 @@ import loginImg from '../../assets/others/authentication2.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../provider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from '../../component/socialLogin/socialLogin';
 const Login = () => {
      const [disabled, setDisabled] = useState(true);
      const { singInUser } = useContext(AuthContext);
 
      const navigate = useNavigate();
      const location = useLocation();
-     const from = location?.state?.from?.pathname || '/'
+     const navigateLocation = location?.state?.from?.pathname || '/'
+     console.log(location?.state?.from?.pathname);
      useEffect(() => {
-          loadCaptchaEnginge(6);
+          loadCaptchaEnginge(4);
      }, [])
 
      const handelLogin = (e) => {
@@ -24,7 +26,7 @@ const Login = () => {
                     const user = result.user;
                     console.log(user);
                     alert('login successfully');
-                    navigate(from, { replace: true })
+                    navigate(navigateLocation, { replace: true })
                })
      }
      const handelValidateCaptcha = (e) => {
@@ -76,6 +78,8 @@ const Login = () => {
                                         <button type='submit' disabled={disabled} className="btn btn-primary w-full">Login</button>
                                    </div>
                               </form>
+
+                              <SocialLogin />
                          </div>
                     </div>
                </div>
