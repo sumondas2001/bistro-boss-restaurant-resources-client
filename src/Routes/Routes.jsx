@@ -12,6 +12,12 @@ import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 import Dashboard from "../LayOut/Dashboard";
 import Card from "../Pages/Dashboard/Card/Card";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AddItems from "../Pages/Dashboard/AddItems/AddItems";
+import AdminRoutes from "./AdminRoutes";
+import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
+import UpdateMenu from "../Pages/Dashboard/UpdateMenu/UpdateMenu";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 
 
 export const router = createBrowserRouter([
@@ -55,13 +61,37 @@ export const router = createBrowserRouter([
                <Dashboard />
           </PrivateRoutes>,
           children: [
+               // normal user routes
                {
                     path: 'my-cart',
                     element: <Card />
                },
                {
+                    path: 'payment',
+                    element: <Payment />
+               },
+               {
+                    path: 'payment-history',
+                    element: <PaymentHistory />
+               },
+               // admin only routes
+               {
                     path: 'all-users',
-                    element: <AllUsers />
+                    element: <AdminRoutes> <AllUsers /></AdminRoutes>
+               },
+               {
+                    path: 'add-items',
+                    element: <AdminRoutes><AddItems /></AdminRoutes>
+               },
+               {
+                    path: 'manage-items',
+                    element: <AdminRoutes><ManageItems /></AdminRoutes>
+               },
+               {
+                    path: 'update-menu/:id',
+                    element: <AdminRoutes><UpdateMenu /></AdminRoutes>
+
+
                }
           ]
      }

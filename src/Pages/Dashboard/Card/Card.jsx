@@ -3,6 +3,7 @@ import useCart from "../../../hooks/useCart";
 import PagesCover from "../DashboardSherad/PagesCover/PagesCover";
 import { HiArchiveBoxXMark } from "react-icons/hi2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Card = () => {
      const [cartItem, refetch] = useCart();
@@ -57,7 +58,13 @@ const Card = () => {
                <div className="flex justify-between ">
                     <h3 className="text-2xl font-bold uppercase">Total orders: {cartItem.length}</h3>
                     <h3 className="text-2xl font-bold uppercase">total price: {(totalPrice).toFixed(2)} $</h3>
-                    <button className="btn bg-[#D1A054]">PAY</button>
+                    {
+                         cartItem?.length ? <Link to={'/dashboard/payment'}>
+                              <button className="btn bg-[#D1A054]">PAY</button>
+                         </Link>
+                              :
+                              <button disabled className="btn bg-[#D1A054]">PAY</button>
+                    }
                </div>
 
 
@@ -118,7 +125,7 @@ const Card = () => {
                     </div>
                </div>
 
-          </div>
+          </div >
      );
 };
 

@@ -26,13 +26,13 @@ const Dashboard = () => {
                                         </NavLink>
                                    </li>
                                    <li >
-                                        <NavLink className={'flex items-center gap-2'} to={'/dashboard/add-item'}>
+                                        <NavLink className={'flex items-center gap-2'} to={'/dashboard/add-items'}>
                                              <ImSpoonKnife />
                                              add items
                                         </NavLink>
                                    </li>
                                    <li >
-                                        <NavLink className={'flex items-center gap-2'} to={'/dashboard/manage-item'}>
+                                        <NavLink className={'flex items-center gap-2'} to={'/dashboard/manage-items'}>
                                              <FaList />
                                              manage items
                                         </NavLink>
@@ -67,10 +67,12 @@ const Dashboard = () => {
                                              </NavLink>
                                         </li>
                                         <li >
+
                                              <NavLink className={'flex items-center gap-2'} to={'/dashboard/payment-history'}>
                                                   <FaWallet />
                                                   payment history
                                              </NavLink>
+
                                         </li>
                                         <li >
                                              <NavLink className={'flex items-center gap-2'} to={'/dashboard/my-cart'}>
